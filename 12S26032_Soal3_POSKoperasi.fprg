@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="12S26032_Soal3_POSKoperasi"/>
+        <attribute name="authors" value="marga"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2026-10-26 03:59:06 PM"/>
+        <attribute name="created" value="bWFyZ2E7TUFSR0FSRVRIOzIwMjYtMTAtMjY7MDM6MTI6MTMgUE07MjQ2MA=="/>
+        <attribute name="edited" value="bWFyZ2E7TUFSR0FSRVRIOzIwMjYtMTAtMjY7MDM6NTk6MDYgUE07MTsyNTgx"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="namabarang, metodebayar" type="String" array="False" size=""/>
+            <declare name="hargasatuan, jumlahbeli, uangbayar, subtotalkotor, totalunit, nilaidiskon, insentifqris, totaltagihanbersih, nominalditerima, uangkembalian, subtotalbelanjakotor" type="Real" array="False" size=""/>
+            <output expression="&quot;masukkan nama barang&quot;" newline="True"/>
+            <input variable="namabarang"/>
+            <output expression="&quot;hargasatuan&quot;" newline="True"/>
+            <input variable="hargasatuan"/>
+            <output expression="&quot;jumlah beli&quot;" newline="True"/>
+            <input variable="jumlahbeli"/>
+            <output expression="&quot;metode pembayaran&quot;" newline="True"/>
+            <input variable="metodebayar"/>
+            <output expression="&quot;uang bayar&quot;" newline="True"/>
+            <input variable="uangbayar"/>
+            <assign variable="totaltagihanbersih" expression="hargasatuan*jumlahbeli"/>
+            <assign variable="subtotalkotor" expression="hargasatuan*jumlahbeli"/>
+            <while expression="hargasatuan &gt; 0">
+                <if expression="jumlahbeli &gt; 0">
+                    <then>
+                        <if expression="metodebayar == &quot;TUNAI&quot; OR metodebayar== &quot;QRIS&quot;">
+                            <then>
+                                <if expression="uangbayar &lt; totaltagihanbersih">
+                                    <then>
+                                        <output expression="&quot;kekurangan uang bayar, ulangi input&quot;" newline="True"/>
+                                    </then>
+                                    <else/>
+                                </if>
+                            </then>
+                            <else>
+                                <output expression="&quot;kesalahan, ulangi input&quot;" newline="True"/>
+                            </else>
+                        </if>
+                        <assign variable="totalunit" expression="jumlahbeli"/>
+                        <if expression="subtotalkotor &gt;= 300000">
+                            <then>
+                                <assign variable="nilaidiskon" expression="0.15"/>
+                            </then>
+                            <else>
+                                <if expression="subtotalkotor &lt; 300000">
+                                    <then>
+                                        <assign variable="nilaidiskon" expression="0.1"/>
+                                    </then>
+                                    <else>
+                                        <if expression="subtotalkotor &lt; 150000">
+                                            <then>
+                                                <assign variable="nilaidiskon" expression="0.05"/>
+                                            </then>
+                                            <else>
+                                                <if expression="subtotalkotor &lt; 50000">
+                                                    <then>
+                                                        <assign variable="nilaidiskon" expression="0"/>
+                                                    </then>
+                                                    <else/>
+                                                </if>
+                                            </else>
+                                        </if>
+                                    </else>
+                                </if>
+                            </else>
+                        </if>
+                        <if expression="metodebayar == &quot;QRIS&quot; AND (subtotalkotor-nilaidiskon) &gt;= 25000">
+                            <then>
+                                <assign variable="insentifqris" expression="2000"/>
+                            </then>
+                            <else>
+                                <assign variable="insentifqris" expression="0"/>
+                            </else>
+                        </if>
+                        <assign variable="totaltagihanbersih" expression="subtotalkotor-nilaidiskon-insentifqris"/>
+                        <output expression="&quot;subtotalbelanjakotor&quot; &amp; subtotalkotor" newline="True"/>
+                        <output expression="&quot;nilaidiskon:&quot; &amp; nilaidiskon" newline="True"/>
+                        <output expression="&quot;insentifqris:&quot; &amp; insentifqris" newline="True"/>
+                        <output expression="&quot;totaltagihanbersih:&quot; &amp; totaltagihanbersih" newline="True"/>
+                        <output expression="&quot;metodebayar:&quot; &amp; metodebayar" newline="True"/>
+                    </then>
+                    <else>
+                        <output expression="&quot;kesalahan, ulangi input&quot;" newline="True"/>
+                    </else>
+                </if>
+            </while>
+            <output expression="&quot;kesalahan, ulangi input&quot;" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>

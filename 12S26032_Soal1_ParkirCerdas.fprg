@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="12S26032_Soal1_ParkirCerdas"/>
+        <attribute name="authors" value="marga"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2026-10-26 02:17:05 PM"/>
+        <attribute name="created" value="bWFyZ2E7TUFSR0FSRVRIOzIwMjYtMTAtMjY7MTI6NTk6MDMgUE07MjQ3MA=="/>
+        <attribute name="edited" value="bWFyZ2E7TUFSR0FSRVRIOzIwMjYtMTAtMjY7MDI6MTc6MDUgUE07MTsyNTcz"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="jeniskendaraan, kategoripengendara, statustiket, diskonsivitas" type="String" array="False" size=""/>
+            <declare name="durasiparkir" type="Integer" array="False" size=""/>
+            <declare name="tarifparkirdasar, nilaipotongandiskon, biayaparkirbersih, dendatikethilang, totaltagihanakhir" type="Real" array="False" size=""/>
+            <output expression="&quot;masukkan jenis kendaraan&quot;" newline="True"/>
+            <input variable="jeniskendaraan"/>
+            <output expression="&quot;masukkan kategori pengendara&quot;" newline="True"/>
+            <input variable="kategoripengendara"/>
+            <output expression="&quot;masukkan durasi jam&quot;" newline="True"/>
+            <input variable="durasiparkir"/>
+            <output expression="&quot;status tiket&quot;" newline="True"/>
+            <input variable="statustiket"/>
+            <assign variable="tarifparkirdasar" expression="0"/>
+            <assign variable="biayaparkirbersih" expression="tarifparkirdasar"/>
+            <assign variable="dendatikethilang" expression="0"/>
+            <if expression="jeniskendaraan == &quot;MOTOR&quot; OR jeniskendaraan == &quot;MOBIL&quot;">
+                <then>
+                    <if expression="kategoripengendara == &quot;DEL&quot; OR kategoripengendara == &quot;UMUM&quot;">
+                        <then>
+                            <if expression="durasiparkir &gt; 0">
+                                <then>
+                                    <if expression="statustiket == &quot;ada&quot; OR statustiket == &quot;hilang&quot;">
+                                        <then>
+                                            <if expression="durasiparkir &lt;= 2 AND jeniskendaraan == &quot;MOBIL&quot;">
+                                                <then>
+                                                    <assign variable="tarifparkirdasar" expression="5000"/>
+                                                </then>
+                                                <else>
+                                                    <assign variable="tarifparkirdasar" expression="tarifparkirdasar + 3000"/>
+                                                </else>
+                                            </if>
+                                            <if expression="durasiparkir &lt;=2 AND jeniskendaraan == &quot;MOTOR&quot;">
+                                                <then>
+                                                    <assign variable="tarifparkirdasar" expression="tarifparkirdasar + 1000"/>
+                                                </then>
+                                                <else>
+                                                    <assign variable="tarifparkirdasar" expression="tarifparkirdasar + 1000"/>
+                                                </else>
+                                            </if>
+                                            <if expression="statustiket == &quot;hilang&quot;">
+                                                <then>
+                                                    <assign variable="dendatikethilang" expression="50000"/>
+                                                </then>
+                                                <else/>
+                                            </if>
+                                            <if expression="kategoripengendara == &quot;DEL&quot;">
+                                                <then>
+                                                    <assign variable="nilaipotongandiskon" expression="0.02"/>
+                                                </then>
+                                                <else/>
+                                            </if>
+                                        </then>
+                                        <else>
+                                            <output expression="&quot;KESALAHAN, ULANGI INPUT&quot;" newline="True"/>
+                                        </else>
+                                    </if>
+                                </then>
+                                <else>
+                                    <output expression="&quot;KESALAHAN, ULANGI INPUT&quot;" newline="True"/>
+                                </else>
+                            </if>
+                        </then>
+                        <else>
+                            <output expression="&quot;KESALAHAN, ULANGI INPUT&quot;" newline="True"/>
+                        </else>
+                    </if>
+                    <assign variable="totaltagihanakhir" expression="biayaparkirbersih+dendatikethilang"/>
+                    <output expression="&quot;jenis kendaraan&quot; &amp; jeniskendaraan" newline="True"/>
+                    <output expression="&quot;kategori pengendara&quot; &amp; kategoripengendara" newline="True"/>
+                    <output expression="&quot;durasi parkir&quot; &amp; durasiparkir" newline="True"/>
+                    <output expression="&quot;tarif parkir dasar&quot; &amp; tarifparkirdasar" newline="True"/>
+                    <output expression="&quot;nilai potongan diskon&quot; &amp; nilaipotongandiskon" newline="True"/>
+                    <output expression="&quot;denda tiket hilang&quot; &amp; statustiket" newline="True"/>
+                    <output expression="&quot;total tagihan akhir&quot; &amp; totaltagihanakhir" newline="True"/>
+                </then>
+                <else>
+                    <output expression="&quot;KESALAHAN, ULANGI INPUT&quot;" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>

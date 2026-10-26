@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="12S26032_Soal2_AuditAirAsrama"/>
+        <attribute name="authors" value="marga"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2026-10-26 03:12:06 PM"/>
+        <attribute name="created" value="bWFyZ2E7TUFSR0FSRVRIOzIwMjYtMTAtMjY7MDI6MTc6MTYgUE07MjQ2Nw=="/>
+        <attribute name="edited" value="bWFyZ2E7TUFSR0FSRVRIOzIwMjYtMTAtMjY7MDM6MTI6MDYgUE07MTsyNTcw"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="namaasrama, nomorkamar, statusdiagnosa" type="String" array="False" size=""/>
+            <declare name="jumlahhari, jumlahhariboros, N" type="Integer" array="False" size=""/>
+            <declare name="totalkonsumsiair, ratarataharian, volumeair" type="Real" array="False" size=""/>
+            <output expression="&quot;masukkan nama asrama&quot;" newline="True"/>
+            <input variable="namaasrama"/>
+            <output expression="&quot;masukkan nomor kamar&quot;" newline="True"/>
+            <input variable="nomorkamar"/>
+            <output expression="&quot;jumlah hari&quot;" newline="True"/>
+            <input variable="jumlahhari"/>
+            <output expression="&quot;masukkan volume harian&quot;" newline="True"/>
+            <input variable="volumeair"/>
+            <assign variable="N" expression="jumlahhari"/>
+            <assign variable="totalkonsumsiair" expression="volumeair"/>
+            <assign variable="ratarataharian" expression="totalkonsumsiair / N"/>
+            <assign variable="jumlahhariboros" expression="0"/>
+            <if expression="jumlahhari &gt;= 3 AND jumlahhari &lt;= 14">
+                <then>
+                    <for variable="volumeair" start="1" end="N" direction="inc" step="1">
+                        <if expression="volumeair &gt;= 0.0">
+                            <then>
+                                <if expression="ratarataharian &lt;200">
+                                    <then>
+                                        <assign variable="statusdiagnosa" expression="&quot;SANGAT HEMAT (PENGGUNAAN AIR TELADAN&quot;"/>
+                                    </then>
+                                    <else>
+                                        <if expression="200 &lt;= ratarataharian &lt;=350">
+                                            <then>
+                                                <assign variable="statusdiagnosa" expression="&quot;NORMAL (KONSUMSI AIR WAJAR &amp; STABIL)&quot;"/>
+                                            </then>
+                                            <else>
+                                                <if expression="ratarataharian &gt; 350">
+                                                    <then>
+                                                        <if expression="jumlahhariboros &gt;= 3 OR volumeair &gt;= 600">
+                                                            <then>
+                                                                <assign variable="statusdiagnosa" expression="&quot;ANOMALI KRITIS : INDIKASI KEBOCORAN PIPA / KERAN RUSAK! WAJIB SEGERA DIINPEKSI&quot;"/>
+                                                            </then>
+                                                            <else>
+                                                                <assign variable="statusdiagnosa" expression="&quot;PEMBOROSAN SEDANG: PERLU PENGINGAT DAN EVALUASI PENGHUNI KAMAR&quot;"/>
+                                                            </else>
+                                                        </if>
+                                                    </then>
+                                                    <else/>
+                                                </if>
+                                            </else>
+                                        </if>
+                                    </else>
+                                </if>
+                            </then>
+                            <else>
+                                <output expression="&quot;kesalahan, ulangi input&quot;" newline="True"/>
+                            </else>
+                        </if>
+                        <output expression="&quot;nama asrama:&quot; &amp; namaasrama" newline="True"/>
+                        <output expression="&quot;jumlahhari:&quot; &amp; jumlahhari" newline="True"/>
+                        <output expression="&quot;totalkonsumsiair:&quot; &amp; totalkonsumsiair" newline="True"/>
+                        <output expression="&quot;ratarataharian:&quot; &amp; ratarataharian" newline="True"/>
+                        <output expression="&quot;jumlahhariboros:&quot; &amp; jumlahhariboros" newline="True"/>
+                        <output expression="&quot;status diagnosa:&quot; &amp; statusdiagnosa" newline="True"/>
+                    </for>
+                </then>
+                <else>
+                    <output expression="&quot;kesalahan, ulangi input&quot;" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>
